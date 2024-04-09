@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>signup-form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .signup-form .btn {
+      font-size: 16px;
+      font-weight: bold;
+      background-color: palevioletred;
+      border: none;
+      min-width: 140px;
+    }
+
+    .signup-form .btn:hover,
+    .signup-form .btn:focus {
+      background: #0f0f0f !important;
+      outline: none;
+    }
+
+    .formlayout {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .part1 {
+      flex: 0 0 40%; /* Set width to 40% */
+      background-image: url('13824.jpg'); /* Replace with your actual image URL */
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px; /* Ensure image visibility */
+    }
+
+    .part2 {
+      flex: 0 0 60%; /* Set width to 60% */
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+    }
+
+    .form {
+        flex: 0 0 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; /* Allow form fields to wrap on small screens */
+      justify-content: space-between; /* Distribute form fields horizontally */
+    }
+
+    @media (min-width: 768px) {
+      .formlayout {
+        flex-direction: row;
+      }
+    }
+
+    .form-control {
+      height: 45px;
+      border-radius: 10px;
+      padding-left: .75em;
+      padding-right: .75em;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+    }
+
+
+    .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .card-body {
+            flex-grow: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            outline: 2px solid palevioletred;
+        }
+
+        .card-body p {
+            display: none;
+        }
+
+        .card-body:hover p {
+            display: block;
+        }
+  </style>
+</head>
+<body>
+
+  <!-- page-1(Landing Page) Start -->
+  <div class="formlayout">
+    <div class="part1"></div>
+    <div class="part2">
+      <div class="form">
+        <div class="signup-form">
+          <form action="ClientPage.html" method="get">
+            <h2>Sign Up to Dribbble</h2>
+
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Name" required="required">
+              </div>
+              <div class="col">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="required">
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="required">
+            </div>
+            <div class="form-group mt-3">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="required">
+            </div>
+            <div class="form-group  mt-3">
+                <label class="form-check-label"><input type="checkbox" required="required">Creating an account means you're okay with our  <a
+                    href="#">Terms of Services, </a> &amp; <a href="#">Privacy Policy</a>and our default <a href="#">Notification Settings</a></label>
+            </div>
+            <div class="form-group  mt-3">
+                <button type="submit" class="btn btn-primary btn-lg">Next</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<!-- page-1(Landing Page) End -->
+<!-- Page-2 (Create Profile) -->
+<div class="container-fluid">
+  <div class="form mt-5">
+    <h3>Welcome! let's Create your profile</h3>
+    <p>Let others get to know you better! you can do this letter.</p>
+  <div class="row">
+    <div class="text-center col-lg-6 mt-5">
+      <h3>Add an Avtar</h3>
+      <img src="uploadImage.jpg" style="height: 200px;width: 250px;">
+      <h5 class="mt-5">Add your Location</h5>
+      <input type="text" name="Location" id="Location" placeholder="Enter a Location" required="required">
+    </div>
+
+    <div class="text-center col-lg-6 mt-5">
+      <form id="imageUploadForm" action="upload.php" method="post" enctype="multipart/form-data" class="text-center col-lg-6 mt-5">
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <br><br>
+        <select name="defaultOption" id="defaultOption">
+            <option value="">Choose one of our defaults</option>
+            <option value="default1.jpg">Default Image 1</option>
+            <option value="default2.jpg">Default Image 2</option>
+            <option value="default3.jpg">Default Image 3</option>
+        </select> 
+    </form> 
+    </div>
+  </div>
+  
+  
+        <div class="form-group mt-5">
+            <button id="createAccountBtn" style="background-color: palevioletred" type="submit" class="btn btn-primary" disabled>Next</button>
+        </div>
+    </div>
+    
+    <script>
+      // Function to enable/disable Create Account button based on form fields
+      function checkFields() {
+          const fileToUpload = document.getElementById('fileToUpload').value;
+          const defaultOption = document.getElementById('defaultOption').value;
+          const locationInput = document.getElementById('locationInput').value;
+
+          // Enable Create Account button if any of the fields are not empty
+          if (fileToUpload || defaultOption || locationInput) {
+              document.getElementById('createAccountBtn').disabled = false;
+          } else {
+              document.getElementById('createAccountBtn').disabled = true;
+          }
+      }
+
+      // Add event listeners to form elements
+      document.getElementById('fileToUpload').addEventListener('change', checkFields);
+      document.getElementById('defaultOption').addEventListener('change', checkFields);
+      document.getElementById('locationInput').addEventListener('input', checkFields);
+  </script>
+</div>
+</div>
+<!-- Page-2 (Create Profile) -->
+<!-- Page -3 (Selection card)Start -->
+<div class="container-fluid mt-5">
+  <h2 class="text-center mt-3 mb-3">
+      What Brings you to Dribble?
+  </h2>
+  <center><p>Select the options that best describe you. Don't worry, you can explore other options later.</p></center>
+  <div class="row mt-5">
+      <div class="col-lg-4 mt-5 mb-5">
+          <div class="card text-center">
+              <div class="card-body">
+                  <img src="13829.jpg" style="height: 200px;width: 200px;">
+                  <h4>I am a designer looking to share my work</h4>
+                  <p></p>
+                  <input type="checkbox" class="option-checkbox" name="card1" value="card1">
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 mt-5 mb-5">
+          <div class="card text-center">
+              <div class="card-body">
+                  <img src="13829.jpg" style="height: 200px;width: 200px;">
+                  <h4>I am looking to hire a designer</h4>
+                  <p></p>
+                  <input type="checkbox" class="option-checkbox" name="card2" value="card2">
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 mt-5 mb-5">
+          <div class="card text-center">
+              <div class="card-body">
+                  <img src="13829.jpg" style="height: 200px;width: 200px;">
+                  <h4>I am looking for design inspiration</h4>
+                  <p>With over 7 million shots from a vast community of designers, Dribbble is the leading source for design inspiration:</p>
+                  <input type="checkbox" class="option-checkbox" name="card3" value="card3">
+              </div>
+          </div>
+      </div>
+  </div>
+  <div id="message" class="mt-3 mb-5 text-center" style="display: none;">Anything else? You can select multiple!</div>
+</div>
+
+<div class="form-group mt-3 mb-5 text-center">
+  <button style="background-color: palevioletred"  id="finishBtn" type="submit" class="btn btn-primary btn-lg" disabled>Finish</button>
+  <br>
+  or Press <a href="">Return</a>
+</div>
+
+<script>
+  document.querySelectorAll('.option-checkbox').forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+          var checked = document.querySelectorAll('.option-checkbox:checked').length;
+          if ((checked == 1)||(checked == 2 )) {
+              document.getElementById('message').style.display = 'block';
+          } else {
+              document.getElementById('message').style.display = 'none';
+          }
+          document.getElementById('finishBtn').disabled = checked == 0;
+      });
+  });
+</script>
+<!-- Page -3 (Selection card)End -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Dribble</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">inspiration <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Find Work</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Learn Design</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Go Pro</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Hire Designers</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- Navbar -->
+<!-- page-4 (Email verfication) Start -->
+<div class="container-fluid mt-5">
+  <h2 class="text-center mt-5">
+     Please verify your email...
+  </h2>
+  <div class=" text-center mt-3">
+      <img src="ConfirmEmail.jpg" alt="Email">
+  </div>
+      <p class="text-center mt-3">Please verify your email address. We've sent a confirmation email to:</p>
+      <h4 class="text-center mt-3">account@refero.design</h4>
+      <p class="text-center mt-3">Click the confirmation link in that email to begin using Dribbble.</p>
+      <p class="text-center mt-3">Didn't receive the email? Check your Spam folder, it may have been caught by a filter. If you still don't see it, you can <a href="">resend the confirmation email</a>.</p>
+      <p class="text-center mt-3">Wrong email address? <a href="">Change it</a>.</p>
+  </div> 
+</div>
+<!-- page-4 (Email verfication) End -->
+
+
+<!-- <Footer>-->
+  <div class="cntainer-fluid bg-light mt-5">
+    <div class="container">
+     <div class="row mt-3">
+         
+         <div class="col-lg-3 mt-3 mb-3">
+             <h4 class="text-center">Dribble</h4>
+             <p>
+              Dribbble is the world's leading community for creatives to share, grow, and get hired.
+          </p>
+             <p>
+                 <i class="fa fa-instagram ms-3 text-center" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-facebook-official ms-3" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-whatsapp ms-3" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-twitter ms-3" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-linkedin-square ms-3"  aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-reddit ms-3" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+                 <i class="fa fa-twitter ms-3" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp&nbsp
+             </p>
+            
+            
+
+         </div>
+         <div class="col-lg-3 mt-3 mb-3">
+          <h6 class=>For Desigers</h6>
+          <p>Go Pro!</p>
+          <p>Explore design work</p>
+          <P>Design blog</P>
+          <p>Overtime podcast</p>
+          <p>Playoffs</p>
+          <p>Weekly Warm-up</p>
+          <p>Refer a Friend</p>
+          <p>Code of conduct</p>
+      </div>
+      <div class="col-lg-3  mt-3 mb-3">
+        <h6 class>Hire Desigers</h6>
+        <p>Post a job opening</p>
+        <p>Post a freelance project</p>
+        <P>Search for designers</P>
+        <h6>Brands</h6>
+          <p>Advertise with us</p>
+    </div>
+    <div class="col-lg-3 mt-3 mb-3">
+      <h6 class="">Company</h6>
+      <p>About</p>
+          <p>Career</p>
+          <P>Support</P>
+          <p>Media Kit</p>
+          <p>Testimonials</p>
+          <p>API</p>
+          <p>Terms of service</p>
+          <p>Privacy Policy</p>
+          <p>Cookie Policy</p>
+  </div>
+     </div class mb-5>
+     <hr>
+     @ 2023 Dribble.All rights reserved
+    </div>
+</div>
+ <!-- <Footer>-->
+</body>
+</html>
